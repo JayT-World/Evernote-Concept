@@ -26,7 +26,7 @@ h1{font-size:clamp(44px,7vw,84px);letter-spacing:-.012em;line-height:1.06;max-wi
 .lead{font-size:20px;color:var(--mute);max-width:36em;margin:26px auto 32px}
 .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center}
 .fine{color:var(--mute);font-size:14px;margin:18px auto 0;max-width:36em}
-.meter{--warnbg:#fff1d6;--warnink:#6b4300;--p:3.33%;background:var(--card);border-radius:24px;padding:32px;box-shadow:var(--shadow);width:100%;max-width:760px;margin-top:48px;text-align:left}
+.meter{--warnbg:#fff1d6;--warnink:#6b4300;--p:0%;background:var(--card);border-radius:24px;padding:32px;box-shadow:var(--shadow);width:100%;max-width:760px;margin-top:48px;text-align:left}
 .meter label{font-weight:600;font-size:18px}
 .hint{color:var(--mute);font-size:14px;margin:2px 0 0}
 .count{font:600 clamp(56px,9vw,96px)/1 var(--h);letter-spacing:-.01em;margin:14px 0 4px;font-variant-numeric:tabular-nums}
@@ -39,7 +39,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .scale{position:relative;height:56px;font-size:13px;line-height:1.3;color:var(--mute)}
 .scale span{position:absolute;top:0;white-space:nowrap;padding-top:14px}
 .scale span::before{content:"";position:absolute;top:0;left:0;width:2px;height:10px;background:var(--mute);border-radius:2px}
-.scale .t50{left:3.33%}.scale .t1000{left:66.67%}.scale .t1500{right:0;text-align:right}.scale .t1500::before{left:auto;right:0}.scale b{color:var(--ink);font-weight:700}
+.scale .t50{left:0}.scale .t1000{left:66.67%}.scale .t1500{right:0;text-align:right}.scale .t1500::before{left:auto;right:0}.scale b{color:var(--ink);font-weight:700}
 .verdict{margin-top:6px;padding:14px 18px;border-radius:12px;background:var(--mint);font-weight:600;transition:background .25s,color .25s}.verdict.over{background:var(--warnbg);color:var(--warnink)}
 .opts{display:grid;gap:10px;margin-top:10px}
 .opt{display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;border:1px solid var(--line);transition:background .25s,border-color .25s,opacity .25s,transform .25s}
@@ -135,16 +135,16 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 
 <header class="hero">
 <div>
-<h1>Hit the 50-note limit?</h1>
-<p class="lead">The Free plan stops at 50 notes, 1 notebook and one device. Starter goes up to 1,000 notes and 3 devices, while Advanced has no limits on notes, notebooks, tags and devices.</p>
-<div class="row"><a class="btn p" href="#piani">Start your 7-day free trial</a><a class="btn" href="#confronto">Compare plans</a></div>
-<p class="fine">If you cancel before the trial ends, your card is not charged. Eligible university students get 40% off an annual Advanced subscription.</p>
+<h1>Using Evernote on more than one device?</h1>
+<p class="lead">The Free plan syncs to 1 device. Personal and Professional sync to unlimited devices, and add offline access, AI-powered search and PDF annotation.</p>
+<div class="row"><a class="btn p" href="#piani">See the plans</a><a class="btn" href="#confronto">Compare plans</a></div>
+<p class="fine">Personal is €7.99/mo. Professional is €14.99/mo per seat.</p>
 </div>
 <div class="meter" aria-live="polite">
-<label for="n">How many notes do you have?</label> <p class="hint">Drag the slider to see which plan you need.</p>
-<div class="count"><span id="v">50</span> <small>notes</small></div>
-<input id="n" type="range" min="0" max="1500" step="10" value="50" aria-describedby="vd">
-<div class="scale" aria-hidden="true"><span class="t50"><b>Free</b><br>50 notes</span><span class="t1000"><b>Starter</b><br>1,000 notes</span><span class="t1500"><b>Advanced</b><br>unlimited</span></div>
+<label for="n">How many devices do you use?</label> <p class="hint">Drag the slider to see which plan you need.</p>
+<div class="count"><span id="v">1</span> <small>device</small></div>
+<input id="n" type="range" min="1" max="5" step="1" value="1" aria-describedby="vd">
+<div class="scale" aria-hidden="true"><span class="t50"><b>Free</b><br>1 device</span><span class="t1500"><b>Personal &amp; Professional</b><br>unlimited devices</span></div>
 <div class="verdict" id="vd"></div>
 <div class="opts" id="opts"></div>
 </div>
@@ -152,47 +152,45 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 
 <section id="confronto">
 <h2>What changes when you move to a paid plan</h2>
-<p class="sub">Free plan limits compared with Starter and Advanced.</p>
+<p class="sub">Free compared with Personal and Professional.</p>
 <div class="tw"><table>
-<tr><th>Feature</th><th>Free</th><th>Starter</th><th>Advanced</th></tr>
-<tr><td>Notes</td><td>50</td><td>1,000</td><td>Unlimited</td></tr>
-<tr><td>Notebooks</td><td>1</td><td>20</td><td>Unlimited *</td></tr>
-<tr><td>Spaces</td><td>5</td><td>10</td><td>Unlimited</td></tr>
-<tr><td>Tags</td><td>20</td><td>100</td><td>Unlimited</td></tr>
-<tr><td>Attachments</td><td>200</td><td>1,000</td><td>Unlimited</td></tr>
-<tr><td>Multi-device sync</td><td>one device</td><td>3 devices</td><td>Unlimited</td></tr>
-<tr><td>Storage</td><td>1 GB</td><td>5 GB</td><td>Unlimited</td></tr>
-<tr><td>External calendars</td><td>1</td><td>5</td><td>5</td></tr>
+<tr><th>Feature</th><th>Free</th><th>Personal</th><th>Professional</th></tr>
+<tr><td>Devices synced</td><td>1</td><td>Unlimited</td><td>Unlimited</td></tr>
+<tr><td>Monthly upload limit</td><td>1 GB</td><td>100 GB</td><td>2 TB</td></tr>
+<tr><td>Note size limit</td><td>25 MB</td><td>200 MB</td><td>500 MB</td></tr>
+<tr><td>Offline access</td><td>✗</td><td>✓</td><td>✓</td></tr>
+<tr><td>AI-powered search</td><td>✗</td><td>✓</td><td>✓</td></tr>
+<tr><td>PDF annotation</td><td>✗</td><td>✓</td><td>✓</td></tr>
+<tr><td>Tasks &amp; reminders</td><td>Limited</td><td>Full</td><td>Full</td></tr>
+<tr><td>Team collaboration</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr><td>Admin &amp; user management</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr><td>Price</td><td>Free</td><td>€7.99/mo</td><td>€14.99/mo/seat</td></tr>
 </table></div>
-<p class="mute" style="margin-top:12px">* Except for safeguard limits applied to ensure performance and prevent abuse. Source: evernote.com/compare-plans</p>
+<p class="mute" style="margin-top:12px">Source: plan comparison in the project brief.</p>
 </section>
 
 <section id="piani">
 <h2>Choose the plan<br>that’s right for you</h2>
-<p class="sub">Try free for 7 days unless otherwise specified. If you cancel before the trial ends, your card is not charged.</p>
+<p class="sub">Compare what each plan includes and pick the one that fits how you work.</p>
 <div class="plans">
 <div class="card"><div class="tag">Current plan</div><h3>Free</h3><div class="price">No cost</div><div class="mute">To get started</div>
-<ul><li>50 notes</li><li>1 notebook</li><li>one device</li><li>1 GB of storage</li></ul><span class="btn off">Your current plan</span></div>
-<div class="card"><div class="tag">The next step</div><h3>Starter</h3><div class="price">1,000 <span>notes</span></div><div class="mute">See prices below, monthly or annual</div>
-<ul><li>20 notebooks and 10 spaces</li><li>3 devices</li><li>5 GB of storage</li><li>1,000 attachments</li></ul><a class="btn" href="https://www.evernote.com/billy/subscriptions?onboarding=true&amp;promoCode=starter_LATEST_7_day_ft&amp;offer=ft_perm_generic_button_mktgweb_cp-starter-top&amp;hash=starter-1year">Try Starter free for 7 days</a></div>
-<div class="card dk"><div class="tag">No limits</div><h3>Advanced</h3><div class="price">Unlimited</div><div class="mute">See prices below, monthly or annual</div>
-<ul><li>Unlimited notes, notebooks and spaces</li><li>Unlimited tags and attachments</li><li>Unlimited devices</li><li>Unlimited storage</li></ul><a class="btn p" href="https://www.evernote.com/billy/subscriptions?onboarding=true&amp;promoCode=advanced_LATEST_7_day_ft&amp;offer=ft_perm_generic_button_mktgweb_cp-advanced-top&amp;hash=advanced-1year">Try Advanced free for 7 days</a></div>
+<ul><li>1 device synced</li><li>1 GB monthly upload limit</li><li>25 MB note size limit</li><li>Limited tasks &amp; reminders</li></ul><span class="btn off">Your current plan</span></div>
+<div class="card"><div class="tag">The next step</div><h3>Personal</h3><div class="price">€7.99 <span>/mo</span></div><div class="mute">For you, on every device</div>
+<ul><li>Unlimited devices synced</li><li>100 GB monthly upload, 200 MB per note</li><li>Offline access, AI-powered search, PDF annotation</li><li>Full tasks &amp; reminders</li></ul><a class="btn" href="https://evernote.com/compare-plans">Choose Personal</a></div>
+<div class="card dk"><div class="tag">For teams</div><h3>Professional</h3><div class="price">€14.99 <span>/mo/seat</span></div><div class="mute">Everything in Personal, plus</div>
+<ul><li>2 TB monthly upload, 500 MB per note</li><li>Team collaboration</li><li>Admin &amp; user management</li></ul><a class="btn p" href="https://evernote.com/compare-plans">Choose Professional</a></div>
 </div>
 </section>
 
 <section id="prezzi" style="padding-top:0">
 <h2>Pick the plan<br>based on what you need</h2>
-<p class="sub">Official Evernote prices. Switch billing and currency to see the difference between plans.</p>
-<div class="pr-ctl">
-<div class="seg" role="group" aria-label="Billing"><button id="bm" aria-pressed="false">Monthly</button><button id="by" aria-pressed="true">Annual<span class="sv" id="svb"></span></button></div>
-<div class="seg" role="group" aria-label="Currency"><button data-c="USD" aria-pressed="true">USD</button><button data-c="EUR" aria-pressed="false">EUR</button><button data-c="GBP" aria-pressed="false">GBP</button></div>
-</div>
+<p class="sub">Two paid plans, one clear difference: who you work with.</p>
 <div class="pgrid">
-<div class="pc"><h3>Starter</h3><div class="amt" id="a1"></div><div class="m2" id="b1"></div><div class="sv2" id="s1"></div></div>
-<div class="pc dk"><h3>Advanced</h3><div class="amt" id="a2"></div><div class="m2" id="b2"></div><div class="sv2" id="s2"></div></div>
+<div class="pc"><h3>Personal</h3><div class="amt">€7.99 <small>/ month</small></div><div class="m2">One account, unlimited devices</div></div>
+<div class="pc dk"><h3>Professional</h3><div class="amt">€14.99 <small>/ month per seat</small></div><div class="m2">Priced per seat, for teams</div></div>
 </div>
-<div class="pdiff" id="pd"></div>
-<p class="pnote">Prices from Evernote’s help center (<a href="https://help.evernote.com/hc/en-us/articles/46317642175763-Discontinuing-Evernote-Personal-Professional-Introducing-Starter-Advanced-FAQ" target="_blank" rel="noopener">Starter &amp; Advanced FAQ</a>). Subscriptions bought through Google or Apple may be priced differently. Annual savings and per-month equivalents are calculated from these prices.</p>
+<div class="pdiff"><b>Personal vs Professional:</b> Professional costs <b>€7.00 more per month</b> per seat. It adds team collaboration, admin &amp; user management, a 2 TB monthly upload limit (vs 100 GB) and a 500 MB note size limit (vs 200 MB).</div>
+<p class="pnote">Prices and features from the plan comparison in the project brief.</p>
 </section>
 
 <section id="fine" style="padding-top:0">
@@ -208,55 +206,30 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 <path d="M120.244 322.423L142.175 264.746H164.267L130.966 345.92H109.523L76.2227 264.746H98.3145L120.244 322.423Z" fill="currentColor"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M264.508 8.63407C270.71 2.16197 279.638 -0.952651 288.522 0.256201C294.52 1.07232 300.092 3.80881 304.404 8.05408L308.829 12.4094H314.725C347.547 12.4095 374.155 39.0021 374.155 71.8048V135.762H374.122C374.116 160.651 368.038 176.952 355.156 187.525C338.597 203.039 306.516 204.486 287.888 189.593C280.561 183.735 275.705 177.182 270.531 165.806L299.867 154.621C300.872 156.816 302.769 160.455 305.818 163.737C312.063 170.458 325.173 170.492 330.318 165.806C342.736 154.496 332.115 135.767 310.257 135.767L265.927 135.762C237.129 135.762 213.238 114.77 208.737 87.2617C208.74 87.2675 208.745 87.2736 208.748 87.2794C206.265 70.7318 211.336 65.499 221.259 65.4988H248.134C270.142 65.4987 276.118 56.2815 276.118 39.7133V31.2173H272.134C272.134 31.2173 271.604 35.5864 269.992 39.7133C266.577 48.4578 263.286 54.7841 250.435 54.7842C244.67 54.7842 238.904 54.7707 233.138 54.7672C228.853 54.7645 224.567 54.7673 220.282 54.7852L228.701 46L264.508 8.63407ZM330.863 85.1396C323.038 85.1399 316.695 90.3056 316.695 96.6774H345.031C345.031 90.3055 338.687 85.1396 330.863 85.1396Z" fill="#00A82D"/>
 </svg>
-<h2>Your notes shouldn’t<br>have a ceiling.</h2>
-<p>Try Starter or Advanced for 7 days. If you cancel before the trial ends, your card is not charged.</p>
-<a class="btn p" href="#piani">Start your free trial</a>
-<p class="mute" style="margin:22px auto 0;font-size:14px">To switch plans: in your account settings on Evernote Web, click Manage Subscription on the Account Summary page, choose Starter or Advanced, and pick monthly or annual billing. If you subscribed through iTunes or Google Play, manage your subscription there.</p>
+<h2>Your notes should go<br>wherever you do.</h2>
+<p>Move to Personal or Professional and sync your notes across unlimited devices.</p>
+<a class="btn p" href="#piani">Choose your plan</a>
+</p>
 </div>
 </section>
-<footer>Limits and terms taken from evernote.com/compare-plans. Concept page, not official.</footer>
+<footer>Plan features and prices from the project brief. Concept page, not official.</footer>
 </div>
 <script>
 var n=document.getElementById('n'),v=document.getElementById('v'),vd=document.getElementById('vd');
-function f(x){return x.toLocaleString('en-US')}
-var P=[{k:'free',n:'Free',m:50},{k:'starter',n:'Starter',m:1000},{k:'advanced',n:'Advanced',m:0}];
+var P=[{k:'free',n:'Free',m:1},{k:'personal',n:'Personal',m:0},{k:'professional',n:'Professional',m:0}];
 var opts=document.getElementById('opts');
 opts.innerHTML=P.map(function(p){return '<div class="opt" id="o-'+p.k+'"><span class="ic" aria-hidden="true"></span><div><b>'+p.n+'</b><span class="dt"></span></div><span class="pill"></span></div>'}).join('');
-function u(){var x=+n.value;v.textContent=f(x);
-n.style.setProperty('--p',(x/1500*100)+'%');
-var best=x<=50?'free':(x<=1000?'starter':'advanced');
-vd.textContent=x<=50?'With '+f(x)+' notes, you’re within the Free limit.':
-x<=1000?'With '+f(x)+' notes, Free isn’t enough: you need at least Starter.':
-'With '+f(x)+' notes, Starter isn’t enough either: you need Advanced.';
-vd.className='verdict'+(x>50?' over':'');
-P.forEach(function(p){var el=document.getElementById('o-'+p.k),fits=p.m==0||x<=p.m,isBest=p.k==best&&x>50,d;
-if(p.m==0)d='Unlimited notes';
-else if(fits)d=x==p.m?'Limit reached: '+f(p.m)+' of '+f(p.m)+' notes':f(p.m-x)+' notes left out of '+f(p.m);
-else d='Over the '+f(p.m)+'-note limit by '+f(x-p.m);
+function u(){var x=+n.value;v.textContent=x;v.nextElementSibling.textContent=x==1?'device':'devices';
+n.style.setProperty('--p',((x-1)/4*100)+'%');
+vd.textContent=x<=1?'With 1 device, you’re within the Free limit.':'With '+x+' devices, Free isn’t enough: Personal and Professional sync unlimited devices.';
+vd.className='verdict'+(x>1?' over':'');
+P.forEach(function(p){var el=document.getElementById('o-'+p.k),fits=p.m==0||x<=p.m,isBest=p.k=='personal'&&x>1,d;
+d=p.m==0?'Unlimited devices synced':(fits?'1 device synced':'Syncs to 1 device only, you use '+x);
 el.className='opt '+(fits?'ok':'no')+(isBest?' best':'');
 el.querySelector('.ic').textContent=fits?'\u2713':'\u2715';
 el.querySelector('.dt').textContent=d;
 el.querySelector('.pill').textContent=isBest?'Right for you':(fits?'Enough':'Not enough');});}
 n.addEventListener('input',u);u();
-
-(function(){
-var D={USD:{s:[14.99,99],a:[24.99,249.99],y:'$'},EUR:{s:[12.99,79.9],a:[21.99,199.99],y:'€'},GBP:{s:[8.99,64.9],a:[14.99,154.9],y:'£'}};
-var cur='USD',yr=true;
-function f(v){return D[cur].y+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
-function sv(p){return Math.round((1-p[1]/(p[0]*12))*100)}
-function $(i){return document.getElementById(i)}
-function r(){var d=D[cur],S=d.s,A=d.a,y=d.y;
-$('bm').setAttribute('aria-pressed',!yr);$('by').setAttribute('aria-pressed',yr);
-document.querySelectorAll('[data-c]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.c===cur)});
-$('svb').textContent='Save up to '+Math.max(sv(S),sv(A))+'%';
-[[S,1],[A,2]].forEach(function(x){var p=x[0],n=x[1];
-if(yr){$('a'+n).innerHTML=f(p[1]/12)+' <small>/ month</small>';$('b'+n).textContent='Billed annually: '+f(p[1])+' per year';$('s'+n).textContent='You save '+f(p[0]*12-p[1])+' a year ('+sv(p)+'%)';}
-else{$('a'+n).innerHTML=f(p[0])+' <small>/ month</small>';$('b'+n).textContent='Billed monthly: '+f(p[0]*12)+' over 12 months';$('s'+n).textContent='Annual billing saves '+f(p[0]*12-p[1])+' a year';}});
-var dm=yr?(A[1]-S[1])/12:A[0]-S[0],dy=yr?A[1]-S[1]:(A[0]-S[0])*12;
-$('pd').innerHTML='<b>Starter vs Advanced:</b> Advanced costs <b>'+f(dm)+' more per month</b> ('+f(dy)+' a year) '+(yr?'with annual billing':'with monthly billing')+' — for unlimited notes, notebooks, devices and storage instead of 1,000 notes and 3 devices.';}
-$('bm').onclick=function(){yr=false;r()};$('by').onclick=function(){yr=true;r()};
-document.querySelectorAll('[data-c]').forEach(function(b){b.onclick=function(){cur=b.dataset.c;r()}});
-r();})();
 </script>
 </body>
 </html>
