@@ -117,6 +117,7 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 .pnote{margin-top:16px;font-size:13px;color:var(--mute);line-height:1.6}
 @media(max-width:860px){.pgrid{grid-template-columns:1fr}}
 @media(max-width:560px){.pc{padding:24px}.pc .amt{font-size:46px}.seg button{padding:9px 14px;font-size:14px}}
+.team{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 14px}.team .tl{font-weight:600;font-size:16px}.team .seg button{padding:8px 16px;font-size:14px}
 </style>
 </head>
 <body>
@@ -145,6 +146,7 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 <div class="count"><span id="v">1</span> <small>device</small></div>
 <input id="n" type="range" min="1" max="5" step="1" value="1" aria-describedby="vd">
 <div class="scale" aria-hidden="true"><span class="t50"><b>Free</b><br>1 device</span><span class="t1500"><b>Personal &amp; Professional</b><br>unlimited devices</span></div>
+<div class="team"><span class="tl" id="tl">Do you work with a team?</span><div class="seg" role="group" aria-labelledby="tl"><button id="tn" aria-pressed="true">No, just me</button><button id="ty" aria-pressed="false">Yes</button></div></div>
 <div class="verdict" id="vd"></div>
 <div class="opts" id="opts"></div>
 </div>
@@ -215,21 +217,27 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 <footer>Plan features and prices from the project brief. Concept page, not official.</footer>
 </div>
 <script>
-var n=document.getElementById('n'),v=document.getElementById('v'),vd=document.getElementById('vd');
-var P=[{k:'free',n:'Free',m:1},{k:'personal',n:'Personal',m:0},{k:'professional',n:'Professional',m:0}];
+var n=document.getElementById('n'),v=document.getElementById('v'),vd=document.getElementById('vd'),team=false;
+var P=[{k:'free',n:'Free'},{k:'personal',n:'Personal'},{k:'professional',n:'Professional'}];
 var opts=document.getElementById('opts');
 opts.innerHTML=P.map(function(p){return '<div class="opt" id="o-'+p.k+'"><span class="ic" aria-hidden="true"></span><div><b>'+p.n+'</b><span class="dt"></span></div><span class="pill"></span></div>'}).join('');
 function u(){var x=+n.value;v.textContent=x;v.nextElementSibling.textContent=x==1?'device':'devices';
 n.style.setProperty('--p',((x-1)/4*100)+'%');
-vd.textContent=x<=1?'With 1 device, you’re within the Free limit.':'With '+x+' devices, Free isn’t enough: Personal and Professional sync unlimited devices.';
-vd.className='verdict'+(x>1?' over':'');
-P.forEach(function(p){var el=document.getElementById('o-'+p.k),fits=p.m==0||x<=p.m,isBest=p.k=='personal'&&x>1,d;
-d=p.m==0?'Unlimited devices synced':(fits?'1 device synced':'Syncs to 1 device only, you use '+x);
-el.className='opt '+(fits?'ok':'no')+(isBest?' best':'');
-el.querySelector('.ic').textContent=fits?'\u2713':'\u2715';
-el.querySelector('.dt').textContent=d;
-el.querySelector('.pill').textContent=isBest?'Right for you':(fits?'Enough':'Not enough');});}
-n.addEventListener('input',u);u();
+document.getElementById('tn').setAttribute('aria-pressed',!team);document.getElementById('ty').setAttribute('aria-pressed',team);
+var best=team?'professional':(x>1?'personal':'free');
+vd.textContent=team?'To collaborate with a team you need Professional: it’s the only plan with team collaboration and admin & user management.':
+x<=1?'With 1 device and no team, you’re within the Free limit.':'With '+x+' devices, Free isn’t enough: Personal and Professional sync unlimited devices.';
+vd.className='verdict'+(best!='free'?' over':'');
+var R={free:{ok:!team&&x<=1,d:team?'No team collaboration':(x<=1?'1 device synced':'Syncs to 1 device only, you use '+x)},
+personal:{ok:!team,d:team?'No team collaboration or admin':'Unlimited devices synced'},
+professional:{ok:true,d:team?'Team collaboration and admin & user management':'Unlimited devices synced'}};
+P.forEach(function(p){var el=document.getElementById('o-'+p.k),r=R[p.k],isBest=p.k==best&&best!='free';
+el.className='opt '+(r.ok?'ok':'no')+(isBest?' best':'');
+el.querySelector('.ic').textContent=r.ok?'\u2713':'\u2715';
+el.querySelector('.dt').textContent=r.d;
+el.querySelector('.pill').textContent=isBest?'Right for you':(r.ok?'Enough':'Not enough');});}
+n.addEventListener('input',u);
+document.getElementById('tn').onclick=function(){team=false;u()};document.getElementById('ty').onclick=function(){team=true;u()};u();
 </script>
 </body>
 </html>
