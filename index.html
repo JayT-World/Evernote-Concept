@@ -117,7 +117,7 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 .pnote{margin-top:16px;font-size:13px;color:var(--mute);line-height:1.6}
 @media(max-width:860px){.pgrid{grid-template-columns:1fr}}
 @media(max-width:560px){.pc{padding:24px}.pc .amt{font-size:46px}.seg button{padding:9px 14px;font-size:14px}}
-.team{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 14px}.team .tl{font-weight:600;font-size:16px}.team .seg button{padding:8px 16px;font-size:14px}
+.team{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 14px}.team .tl{font-weight:600;font-size:16px}.team .seg button{padding:8px 16px;font-size:14px}.team .seg button{white-space:nowrap}@media(max-width:560px){.team .seg{max-width:100%}.team .seg button{padding:8px 10px;font-size:13px}}
 </style>
 </head>
 <body>
@@ -147,6 +147,7 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 <input id="n" type="range" min="1" max="5" step="1" value="1" aria-describedby="vd">
 <div class="scale" aria-hidden="true"><span class="t50"><b>Free</b><br>1 device</span><span class="t1500"><b>Personal &amp; Professional</b><br>unlimited devices</span></div>
 <div class="team"><span class="tl" id="tl">Do you work with a team?</span><div class="seg" role="group" aria-labelledby="tl"><button id="tn" aria-pressed="true">No, just me</button><button id="ty" aria-pressed="false">Yes</button></div></div>
+<div class="team"><span class="tl" id="ul">How much do you upload each month?</span><div class="seg" role="group" aria-labelledby="ul"><button id="u0" aria-pressed="true">Up to 1 GB</button><button id="u1" aria-pressed="false">Up to 100 GB</button><button id="u2" aria-pressed="false">Up to 2 TB</button></div></div>
 <div class="verdict" id="vd"></div>
 <div class="opts" id="opts"></div>
 </div>
@@ -217,27 +218,34 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 <footer>Plan features and prices from the project brief. Concept page, not official.</footer>
 </div>
 <script>
-var n=document.getElementById('n'),v=document.getElementById('v'),vd=document.getElementById('vd'),team=false;
+var n=document.getElementById('n'),v=document.getElementById('v'),vd=document.getElementById('vd'),team=false,up=0;
+var UL=['1 GB','100 GB','2 TB'];
 var P=[{k:'free',n:'Free'},{k:'personal',n:'Personal'},{k:'professional',n:'Professional'}];
 var opts=document.getElementById('opts');
 opts.innerHTML=P.map(function(p){return '<div class="opt" id="o-'+p.k+'"><span class="ic" aria-hidden="true"></span><div><b>'+p.n+'</b><span class="dt"></span></div><span class="pill"></span></div>'}).join('');
+function $(i){return document.getElementById(i)}
 function u(){var x=+n.value;v.textContent=x;v.nextElementSibling.textContent=x==1?'device':'devices';
 n.style.setProperty('--p',((x-1)/4*100)+'%');
-document.getElementById('tn').setAttribute('aria-pressed',!team);document.getElementById('ty').setAttribute('aria-pressed',team);
-var best=team?'professional':(x>1?'personal':'free');
-vd.textContent=team?'To collaborate with a team you need Professional: it’s the only plan with team collaboration and admin & user management.':
-x<=1?'With 1 device and no team, you’re within the Free limit.':'With '+x+' devices, Free isn’t enough: Personal and Professional sync unlimited devices.';
+$('tn').setAttribute('aria-pressed',!team);$('ty').setAttribute('aria-pressed',team);
+[0,1,2].forEach(function(k){$('u'+k).setAttribute('aria-pressed',up==k)});
+var best=(team||up==2)?'professional':((x>1||up==1)?'personal':'free');
+var why=[];if(team)why.push('team collaboration');if(up==2)why.push('a 2 TB monthly upload limit');
+vd.textContent=best=='professional'?'You need Professional: it’s the only plan with '+why.join(' and ')+(team?', plus admin & user management':'')+'.':
+best=='personal'?(x>1?'With '+x+' devices':'With uploads up to '+UL[up])+', Free isn’t enough: Personal covers it'+(x>1&&up==1?' (unlimited devices, 100 GB monthly upload).':(x>1?' with unlimited devices.':' with a 100 GB monthly upload limit.')):
+'With 1 device, no team and up to 1 GB a month, you’re within the Free limit.';
 vd.className='verdict'+(best!='free'?' over':'');
-var R={free:{ok:!team&&x<=1,d:team?'No team collaboration':(x<=1?'1 device synced':'Syncs to 1 device only, you use '+x)},
-personal:{ok:!team,d:team?'No team collaboration or admin':'Unlimited devices synced'},
-professional:{ok:true,d:team?'Team collaboration and admin & user management':'Unlimited devices synced'}};
-P.forEach(function(p){var el=document.getElementById('o-'+p.k),r=R[p.k],isBest=p.k==best&&best!='free';
+var fr=!team&&x<=1&&up==0,pe=!team&&up<=1;
+var R={free:{ok:fr,d:fr?'1 device synced, 1 GB monthly upload':(team?'No team collaboration':(x>1?'Syncs to 1 device only, you use '+x:'1 GB monthly upload limit'))},
+personal:{ok:pe,d:pe?'Unlimited devices, 100 GB monthly upload':(team?'No team collaboration or admin':'100 GB monthly upload limit')},
+professional:{ok:true,d:team?'Team collaboration and admin & user management':(up==2?'2 TB monthly upload limit':'Unlimited devices, 2 TB monthly upload')}};
+P.forEach(function(p){var el=$('o-'+p.k),r=R[p.k],isBest=p.k==best&&best!='free';
 el.className='opt '+(r.ok?'ok':'no')+(isBest?' best':'');
 el.querySelector('.ic').textContent=r.ok?'\u2713':'\u2715';
 el.querySelector('.dt').textContent=r.d;
 el.querySelector('.pill').textContent=isBest?'Right for you':(r.ok?'Enough':'Not enough');});}
 n.addEventListener('input',u);
-document.getElementById('tn').onclick=function(){team=false;u()};document.getElementById('ty').onclick=function(){team=true;u()};u();
+$('tn').onclick=function(){team=false;u()};$('ty').onclick=function(){team=true;u()};
+[0,1,2].forEach(function(k){$('u'+k).onclick=function(){up=k;u()}});u();
 </script>
 </body>
 </html>
