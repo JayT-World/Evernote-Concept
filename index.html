@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Evernote – Upgrade to a paid plan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f7f6f2;--panel:#efebe3;--card:#fff;--ink:#111;--mute:#5d5b55;--line:#e4dfd4;--line2:#cfc9bb;--green:#00a82d;--green-ink:#1d7a32;--mint:#e8f4e1;--lime:#a8e04e;--pink:#f6c4e6;--yellow:#f8dc4f;--dark:#111;--dark-ink:#fff;--dark-mute:#bdbab2;--shadow:0 12px 32px rgba(40,30,10,.10),0 2px 6px rgba(40,30,10,.06);--h:"Inter Tight","Inter",system-ui,sans-serif;color-scheme:light}
+:root{--bg:#f7f6f2;--panel:#efebe3;--card:#fff;--ink:#111;--mute:#5d5b55;--line:#e4dfd4;--line2:#cfc9bb;--green:#00a82d;--green-ink:#1d7a32;--mint:#e8f4e1;--lime:#a8e04e;--pink:#f6c4e6;--yellow:#f8dc4f;--dark:#111;--dark-ink:#fff;--dark-mute:#bdbab2;--shadow:0 12px 32px rgba(40,30,10,.10),0 2px 6px rgba(40,30,10,.06);--h:"Inter",system-ui,-apple-system,sans-serif;color-scheme:light}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:env(safe-area-inset-bottom,0px)}
-h1,h2,h3{font-family:var(--h);font-weight:600;line-height:1.05;margin:0;letter-spacing:-.022em;font-kerning:normal;font-feature-settings:"kern" 1;text-rendering:optimizeLegibility;text-wrap:balance}
+h1,h2,h3{font-family:var(--h);font-weight:600;line-height:1.05;margin:0;letter-spacing:-.005em;font-kerning:normal;font-feature-settings:"kern" 1;text-rendering:optimizeLegibility;text-wrap:balance}
 a{color:inherit}
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
@@ -22,14 +22,14 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0
 .btn:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 .btn.sm{padding:11px 20px;font-size:15px}
 .hero{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--panel);border-radius:28px;padding:80px 40px 64px;margin-top:8px}
-h1{font-size:clamp(44px,7vw,84px);letter-spacing:-.03em;line-height:1.02;max-width:11em;margin:0 auto}
+h1{font-size:clamp(44px,7vw,84px);letter-spacing:-.012em;line-height:1.06;max-width:11em;margin:0 auto}
 .lead{font-size:20px;color:var(--mute);max-width:36em;margin:26px auto 32px}
 .row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center}
 .fine{color:var(--mute);font-size:14px;margin:18px auto 0;max-width:36em}
 .meter{--warnbg:#fff1d6;--warnink:#6b4300;--p:3.33%;background:var(--card);border-radius:24px;padding:32px;box-shadow:var(--shadow);width:100%;max-width:760px;margin-top:48px;text-align:left}
 .meter label{font-weight:600;font-size:18px}
 .hint{color:var(--mute);font-size:14px;margin:2px 0 0}
-.count{font:600 clamp(56px,9vw,96px)/1 var(--h);letter-spacing:-.03em;margin:14px 0 4px;font-variant-numeric:tabular-nums}
+.count{font:600 clamp(56px,9vw,96px)/1 var(--h);letter-spacing:-.01em;margin:14px 0 4px;font-variant-numeric:tabular-nums}
 .count small{font:500 20px "Inter",system-ui;letter-spacing:0;color:var(--mute)}
 input[type=range]{-webkit-appearance:none;appearance:none;display:block;width:100%;height:10px;border-radius:99px;margin:22px 0 8px;cursor:pointer;background:linear-gradient(to right,var(--green) var(--p),var(--line) var(--p))}
 input[type=range]::-webkit-slider-runnable-track{height:10px;background:transparent}
@@ -68,7 +68,7 @@ td:last-child,th:last-child{color:var(--green-ink);font-weight:600}
 .tag{align-self:flex-start;font-weight:600;font-size:13px;padding:4px 12px;border-radius:99px;background:var(--yellow);color:#111}
 .card:nth-child(2) .tag{background:var(--pink)}.card.dk .tag{background:var(--lime)}
 .card h3{font-size:30px}
-.price{font:600 44px var(--h);letter-spacing:-.025em}.price span{font:400 16px "Inter",system-ui;letter-spacing:0;opacity:.7}
+.price{font:600 44px var(--h);letter-spacing:-.01em}.price span{font:400 16px "Inter",system-ui;letter-spacing:0;opacity:.7}
 ul{list-style:none;padding:0;margin:4px 0 12px;display:grid;gap:10px;flex:1}
 li{display:flex;gap:12px;align-items:center}li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);flex:none}
 .card .btn{text-align:center}
