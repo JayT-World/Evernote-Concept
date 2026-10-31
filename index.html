@@ -185,12 +185,11 @@ table{min-width:0}th,td{padding:12px 10px;font-size:14px}
 <section id="prezzi" style="padding-top:0">
 <h2>Pick the plan<br>based on what you need</h2>
 <p class="sub">Two paid plans, one clear difference: who you work with.</p>
-<div class="pr-ctl"><div class="seg" role="group" aria-label="Billing"><button id="bm" aria-pressed="true">Monthly</button><button id="by" aria-pressed="false">Annual</button></div></div>
 <div class="pgrid">
-<div class="pc"><h3>Personal</h3><div class="amt" id="a1"></div><div class="m2" id="b1"></div><div class="sv2" id="s1" hidden></div></div>
-<div class="pc dk"><h3>Professional</h3><div class="amt" id="a2"></div><div class="m2" id="b2"></div><div class="sv2" id="s2" hidden></div></div>
+<div class="pc"><h3>Personal</h3><div class="amt">€7.99 <small>/ month</small></div><div class="m2">One account, unlimited devices</div></div>
+<div class="pc dk"><h3>Professional</h3><div class="amt">€14.99 <small>/ month per seat</small></div><div class="m2">Priced per seat, for teams</div></div>
 </div>
-<div class="pdiff" id="pd"></div>
+<div class="pdiff"><b>Personal vs Professional:</b> Professional costs <b>€7.00 more per month</b> per seat. It adds team collaboration, admin &amp; user management, a 2 TB monthly upload limit (vs 100 GB) and a 500 MB note size limit (vs 200 MB).</div>
 <p class="pnote">Prices and features from the plan comparison in the project brief.</p>
 </section>
 
@@ -231,21 +230,6 @@ el.querySelector('.ic').textContent=fits?'\u2713':'\u2715';
 el.querySelector('.dt').textContent=d;
 el.querySelector('.pill').textContent=isBest?'Right for you':(fits?'Enough':'Not enough');});}
 n.addEventListener('input',u);u();
-
-(function(){
-/* Prices from the brief. Annual prices are not in the brief: fill y1/y2 (per year) to enable them. */
-var PR={a:{m:7.99,y:null},b:{m:14.99,y:null}},yr=false;
-function $(i){return document.getElementById(i)}
-function f(v){return '€'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
-function r(){$('bm').setAttribute('aria-pressed',!yr);$('by').setAttribute('aria-pressed',yr);
-[[PR.a,1,''],[PR.b,2,' per seat']].forEach(function(x){var p=x[0],n=x[1],u=x[2],A=$('a'+n),B=$('b'+n),S=$('s'+n);
-if(!yr){A.innerHTML=f(p.m)+' <small>/ month'+u+'</small>';B.textContent=n==1?'One account, unlimited devices':'Priced per seat, for teams';S.hidden=true;}
-else if(p.y==null){A.innerHTML='<small>Annual price to be confirmed</small>';B.textContent='Monthly price: '+f(p.m)+' / month'+u;S.hidden=true;}
-else{A.innerHTML=f(p.y/12)+' <small>/ month'+u+'</small>';B.textContent='Billed annually: '+f(p.y)+' per year'+u;S.hidden=false;S.textContent='You save '+f(p.m*12-p.y)+' a year';}});
-var a=yr&&PR.a.y!=null&&PR.b.y!=null;
-var dm=a?(PR.b.y-PR.a.y)/12:PR.b.m-PR.a.m,dy=a?PR.b.y-PR.a.y:null;
-$('pd').innerHTML=(yr&&!a)?'<b>Personal vs Professional:</b> annual prices are not available yet. Monthly, Professional costs <b>'+f(PR.b.m-PR.a.m)+' more</b> per seat.':'<b>Personal vs Professional:</b> Professional costs <b>'+f(dm)+' more per month</b> per seat'+(dy!=null?' ('+f(dy)+' a year)':'')+'. It adds team collaboration, admin &amp; user management, a 2 TB monthly upload limit (vs 100 GB) and a 500 MB note size limit (vs 200 MB).';}
-$('bm').onclick=function(){yr=false;r()};$('by').onclick=function(){yr=true;r()};r();})();
 </script>
 </body>
 </html>
